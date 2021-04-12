@@ -31,10 +31,10 @@ app.get('/download', (req, res) => {
 	var url = c[1]; 
 	const { DownloaderHelper } = require('node-downloader-helper');
 	var dir =  __dirname+"\\mp3";
-	const dl = new DownloaderHelper(url,dir,{override:true});
+	const dl = new DownloaderHelper(url,dir,{fileName:'xd3.mp3',override:true});
 
 	dl.on('end', () =>{res.send(tag + ' dir=' + dir);
-	})
+	}) 
 	dl.start();
 
 	

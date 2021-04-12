@@ -19,13 +19,13 @@
 <div id="msg" style="border: green 1px solid;">msg</div>
 
 <script>
-  var fParsePage =  function (txt){
+  var fParsePage =  function (_parentBtn,txt){
     var a = txt.split("<audio src=");
     var d = document.getElementById("msg");
     d.innerHTML = a.length;
     for(i in a){
       if(i==0) continue;
-      var b = blo0.blBtn(d,"p"+i,"p"+i);
+      var b = blo0.blBtn(d,"p"+i,_parentBtn.innerHTML + "_p"+i);
       var d = blo0.blDiv(d,"d"+i,"d"+i,"grey");
       b.onclick = function(_a,_i){
         return function(){
@@ -38,15 +38,27 @@
       }(a,i);
     }
   }
-  var fParseType =  function (txt){
+  var fParseType =  function (_type,txt){
     var d = document.getElementById("d4Parse");
-    var a = txt.split("date date--mb date--size-3");
+    var a = txt.split('<span class="date date--mb date--size-3" >');
     var date1 = new Date();        
     d.innerHTML = date1.toLocaleTimeString();
+    var newData = null;
+    var n = 0;
     for(i in a){
       if(i==0) continue;
-      var b = blo0.blBtn(d,"b"+i,"b"+i);
-      b.onclick = function(_i,_t){
+      var d1 = a[i].split('</span>');
+      if(newData!=d1[0]){
+        newData=d1[0];
+        n = 1;
+      }
+      else {
+        n++;
+      }
+      var b = blo0.blBtn(d,"b"+i, d1[0] + "_"+_type+n);
+      b.style.backgroundColor = "red";
+      b.style.color = "white";
+      b.onclick = function(_this,_i,_t){
         return function(){
           var a1 = _t.split('href="');
           var a2 = a1[1].split('"');
@@ -56,10 +68,10 @@
           loadDoc(url,   function(txt){
             document.getElementById("ta").value = txt;
             document.getElementById("msg").innerHTML = url;
-            fParsePage(txt);
+            fParsePage(_this,txt);
         });
         }
-      }(i,a[i]);
+      }(b,i,a[i]);
     }     
   }
 function loadDoc(_url,callBack) {
@@ -79,7 +91,7 @@ function download_2_save(_url,callBack) {
       callBack(this.responseText);
     }
   }; 
-  xhttp.open("GET", "http://localhost:3000/download?url=" + _url, true);
+  xhttp.open("GET", "http://localhost:3000/download?url=" + _url , true);
   xhttp.send();
 } 
 
@@ -102,7 +114,7 @@ function r(){
         loadDoc(url,   function(txt){
           document.getElementById("ta").value = txt;
           document.getElementById("msg").innerHTML = Date();
-          fParseType(txt);
+          fParseType(_i,txt);
         });
       }
     }(o,i);
