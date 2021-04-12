@@ -91,7 +91,9 @@ function download_2_save(_url,callBack) {
       callBack(this.responseText);
     }
   }; 
-  xhttp.open("GET", "http://localhost:3000/download?url=" + _url , true);
+  var url = "http://localhost:3000/download?url=" + _url;
+  url += "&filename=xd5.mp3";
+  xhttp.open("GET", url, true);
   xhttp.send();
 } 
 

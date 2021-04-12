@@ -25,16 +25,19 @@ app.get('/exeshell', (req, res) => {
 })
 app.get('/download', (req, res) => {
 	console.log(req.url);
-	var a = req.url;
+	var a = req.url; 
 	var b = a.split('?');
-	var c = b[1].split('url=');
+	var d = b[1].split('&'); 
+	var c = d[0].split('url=');
 	var url = c[1]; 
+	var f = d[1].split('filename=');
+	
 	const { DownloaderHelper } = require('node-downloader-helper');
 	var dir =  __dirname+"\\mp3";
-	const dl = new DownloaderHelper(url,dir,{fileName:'xd3.mp3',override:true});
+	const dl = new DownloaderHelper(url,dir,{fileName:f[1],override:true});
 
 	dl.on('end', () =>{res.send(tag + ' dir=' + dir);
-	}) 
+	})  
 	dl.start();
 
 	
