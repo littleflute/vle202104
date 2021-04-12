@@ -1,10 +1,19 @@
 <!DOCTYPE html>
 <html>
+  <head>    
+  <script src="https://littleflute.github.io/JavaScript/w3.js" ></script>
+  <script src="https://littleflute.github.io/JavaScript/blclass.js" ></script>
+  </head>
 <body>
+  <h2>index.html v0.43</h2>
+  url: <span id="vleType">vleType</span> 
+  <button id="AS_IT_IS" onclick="asItIs()">asitis</button>
+  <button id="ARTS & CULTURE" onclick="arts_Culture()">arts_Culture</button>
+  <button id="AMERICAN STORIES" onclick="AMERICAN_STORIES()">AMERICAN_STORIES</button>
 
-  <h2>index.html v0.34</h2>
-  url: <input type="url" id="myURL" value="https://learningenglish.voanews.com/a/study-suggests-people-who-got-covid-19-protected-for-months/5670611.html"  style="border: red 1px solid; width: 100%;"><br>
-  <button type="button" onclick="loadDoc()">getURL</button>
+  <input type="url" id="myURL" value="https://learningenglish.voanews.com/a/study-suggests-people-who-got-covid-19-protected-for-months/5670611.html"  style="border: red 1px solid; width: 100%;"><br>
+  <button type="button" onclick="downLoadURL()">downLoadURL</button>
+  <span id="d4Parse" style="border: blue 1px solid;">d4Parse</span>
 <div id="demo" style="border: red 1px solid;">
   <textarea id="ta" name="w3review" rows="14" cols="150">
   to download ...  
@@ -13,12 +22,12 @@
 <div id="time" style="border: green 1px solid;">time</div>
 
 <script>
-function loadDoc() {
+  var fParse = null;
+function loadDoc(callBack) {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {  
-      document.getElementById("ta").value = this.responseText
-      document.getElementById("time").innerHTML = Date();
+    if (this.readyState == 4 && this.status == 200) {        
+      callBack(this.responseText);
     }
   };
   var url = document.getElementById("myURL").value;
@@ -26,7 +35,65 @@ function loadDoc() {
   xhttp.open("GET", "http://localhost:3000/geturl?url=" + url, true);
   xhttp.send();
 }
+function downLoadURL(){
+  loadDoc(function(txt){
+    document.getElementById("ta").value = txt;
+    document.getElementById("time").innerHTML = Date();
+    fParse(txt);
+  });
+}
+function arts_Culture(){
+  var url = "https://learningenglish.voanews.com/z/986";
+  document.getElementById("myURL").value = url;
+}
+function AMERICAN_STORIES(){
+  var url = "https://learningenglish.voanews.com/z/1581";
+  document.getElementById("myURL").value = url;
+}
+function asItIs(){
+  var url = "https://learningenglish.voanews.com/z/3521";
+  document.getElementById("myURL").value = url;
+  fParse = function (txt){
+    var d = document.getElementById("d4Parse");
+    var a = txt.split("date date--mb date--size-3");
+    d.innerHTML = "asItIs parse : " + a.length + " :: " + blo0;
+    for(i in a){
+      if(i==0) continue;
+      var b = blo0.blBtn(d,"b"+i,"b"+i);
+      b.onclick = function(_i,_t){
+        return function(){
+          var a1 = _t.split('href="');
+          var a2 = a1[1].split('"');
+          var a3 = a2[0];
+          var v = "https://learningenglish.voanews.com" + a3;
+          document.getElementById("myURL").value = v;
+        }
+      }(i,a[i]);
+    }     
+  }
+}
+function r(){
+  var dvle = document.getElementById("vleType");
+  dvle.innerHTML = "v0.21"; 
+  var o = {
+    "as": 3521,
+    "ac": 986,
+    "aStories": 1581
+  };
+  for(i in o){
+    var b = blo0.blBtn(dvle,"b"+i,i);  
+    b.onclick = function(_o,_i){
+      return function(){
+        var url = "https://learningenglish.voanews.com/z/";
+        url += _o[_i];
+        document.getElementById("myURL").value = url;
+      }
+    }(o,i);
+  }
+};
+r(); 
 </script>
+
 
 </body>
 </html>
