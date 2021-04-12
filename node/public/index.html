@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+  <h2>index.html v0.34</h2>
+  url: <input type="url" id="myURL" value="https://learningenglish.voanews.com/a/study-suggests-people-who-got-covid-19-protected-for-months/5670611.html"  style="border: red 1px solid; width: 100%;"><br>
+  <button type="button" onclick="loadDoc()">getURL</button>
+<div id="demo" style="border: red 1px solid;">
+  <textarea id="ta" name="w3review" rows="14" cols="150">
+  to download ...  
+  </textarea>
+</div>
+<div id="time" style="border: green 1px solid;">time</div>
+
+<script>
+function loadDoc() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {  
+      document.getElementById("ta").value = this.responseText
+      document.getElementById("time").innerHTML = Date();
+    }
+  };
+  var url = document.getElementById("myURL").value;
+
+  xhttp.open("GET", "http://localhost:3000/geturl?url=" + url, true);
+  xhttp.send();
+}
+</script>
+
+</body>
+</html>
