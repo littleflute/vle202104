@@ -5,58 +5,41 @@
   <script src="https://littleflute.github.io/JavaScript/blclass.js" ></script>
   </head>
 <body>
-  <h2>index.html v0.43</h2>
-  url: <span id="vleType">vleType</span> 
-  <button id="AS_IT_IS" onclick="asItIs()">asitis</button>
-  <button id="ARTS & CULTURE" onclick="arts_Culture()">arts_Culture</button>
-  <button id="AMERICAN STORIES" onclick="AMERICAN_STORIES()">AMERICAN_STORIES</button>
+  <h2>index.html v0.45</h2>
+  url: <span id="vleType">vleType</span>  
 
   <input type="url" id="myURL" value="https://learningenglish.voanews.com/a/study-suggests-people-who-got-covid-19-protected-for-months/5670611.html"  style="border: red 1px solid; width: 100%;"><br>
-  <button type="button" onclick="downLoadURL()">downLoadURL</button>
+ 
   <span id="d4Parse" style="border: blue 1px solid;">d4Parse</span>
 <div id="demo" style="border: red 1px solid;">
   <textarea id="ta" name="w3review" rows="14" cols="150">
   to download ...  
   </textarea>
 </div>
-<div id="time" style="border: green 1px solid;">time</div>
+<div id="msg" style="border: green 1px solid;">msg</div>
 
 <script>
-  var fParse = null;
-function loadDoc(callBack) {
-  var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {        
-      callBack(this.responseText);
+  var fParsePage =  function (txt){
+    var a = txt.split("<audio src=");
+    var d = document.getElementById("msg");
+    d.innerHTML = a.length;
+    for(i in a){
+      if(i==0) continue;
+      var b = blo0.blBtn(d,"p"+i,"p"+i);
+      var d = blo0.blDiv(d,"d"+i,"d"+i,"grey");
+      b.onclick = function(_a,_i){
+        return function(){
+          var a1 = _a[_i].split(" data-fallbacksrc=");
+          d.innerHTML = a1[0];
+        }
+      }(a,i);
     }
-  };
-  var url = document.getElementById("myURL").value;
-
-  xhttp.open("GET", "http://localhost:3000/geturl?url=" + url, true);
-  xhttp.send();
-}
-function downLoadURL(){
-  loadDoc(function(txt){
-    document.getElementById("ta").value = txt;
-    document.getElementById("time").innerHTML = Date();
-    fParse(txt);
-  });
-}
-function arts_Culture(){
-  var url = "https://learningenglish.voanews.com/z/986";
-  document.getElementById("myURL").value = url;
-}
-function AMERICAN_STORIES(){
-  var url = "https://learningenglish.voanews.com/z/1581";
-  document.getElementById("myURL").value = url;
-}
-function asItIs(){
-  var url = "https://learningenglish.voanews.com/z/3521";
-  document.getElementById("myURL").value = url;
-  fParse = function (txt){
+  }
+  var fParseType =  function (txt){
     var d = document.getElementById("d4Parse");
     var a = txt.split("date date--mb date--size-3");
-    d.innerHTML = "asItIs parse : " + a.length + " :: " + blo0;
+    var date1 = new Date();        
+    d.innerHTML = date1.toLocaleTimeString();
     for(i in a){
       if(i==0) continue;
       var b = blo0.blBtn(d,"b"+i,"b"+i);
@@ -65,16 +48,31 @@ function asItIs(){
           var a1 = _t.split('href="');
           var a2 = a1[1].split('"');
           var a3 = a2[0];
-          var v = "https://learningenglish.voanews.com" + a3;
-          document.getElementById("myURL").value = v;
+          var url = "https://learningenglish.voanews.com" + a3;
+          document.getElementById("myURL").value = url;
+          loadDoc(url,   function(txt){
+            document.getElementById("ta").value = txt;
+            document.getElementById("msg").innerHTML = url;
+            fParsePage(txt);
+        });
         }
       }(i,a[i]);
     }     
   }
-}
+function loadDoc(_url,callBack) {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {        
+      callBack(this.responseText);
+    }
+  }; 
+  xhttp.open("GET", "http://localhost:3000/geturl?url=" + _url, true);
+  xhttp.send();
+} 
+
 function r(){
   var dvle = document.getElementById("vleType");
-  dvle.innerHTML = "v0.21"; 
+  dvle.innerHTML = "v0.22"; 
   var o = {
     "as": 3521,
     "ac": 986,
@@ -87,6 +85,11 @@ function r(){
         var url = "https://learningenglish.voanews.com/z/";
         url += _o[_i];
         document.getElementById("myURL").value = url;
+        loadDoc(url,   function(txt){
+          document.getElementById("ta").value = txt;
+          document.getElementById("msg").innerHTML = Date();
+          fParseType(txt);
+        });
       }
     }(o,i);
   }
