@@ -5,7 +5,7 @@
   <script src="https://littleflute.github.io/JavaScript/blclass.js" ></script>
   </head>
 <body>
-  <h2>index.html v0.51</h2>
+  <h2>index.html v0.55</h2>
   url: <span id="vleType">vleType</span>  
 
   <input type="url" id="myURL" value="https://learningenglish.voanews.com/a/study-suggests-people-who-got-covid-19-protected-for-months/5670611.html"  style="border: red 1px solid; width: 100%;"><br>
@@ -25,17 +25,22 @@
     d.innerHTML = a.length;
     for(i in a){
       if(i==0) continue;
-      var b = blo0.blBtn(d,"p"+i,_parentBtn.innerHTML + "_p"+i);
+      var b = blo0.blBtn(d,"p"+i,_parentBtn.innerHTML);
       var d = blo0.blDiv(d,"d"+i,"d"+i,"grey");
-      b.onclick = function(_a,_i){
+      b.onclick = function(_this,_a,_i){
         return function(){
           var a1 = _a[_i].split(" data-fallbacksrc=");
           var a2 = a1[0].split('"');
-          download_2_save(a2[1],"xd6.mp3",function(txt){ 
+          var fn = _this.innerHTML;
+          fn = fn.replace(" ","-");
+          fn = fn.replace(", ","-"); 
+          fn += ".mp3";
+
+          download_2_save(a2[1],fn,function(txt){ 
             d.innerHTML = txt; 
         });
         }
-      }(a,i);
+      }(b,a,i);
     }
   }
   var fParseType =  function (_type,txt){
