@@ -31,7 +31,7 @@
         return function(){
           var a1 = _a[_i].split(" data-fallbacksrc=");
           var a2 = a1[0].split('"');
-          download_2_save(a2[1],function(txt){ 
+          download_2_save(a2[1],"xd6.mp3",function(txt){ 
             d.innerHTML = txt; 
         });
         }
@@ -84,7 +84,7 @@ function loadDoc(_url,callBack) {
   xhttp.open("GET", "http://localhost:3000/geturl?url=" + _url, true);
   xhttp.send();
 } 
-function download_2_save(_url,callBack) { 
+function download_2_save(_url,_fileName,callBack) { 
   var xhttp = new XMLHttpRequest(); 
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {        
@@ -92,7 +92,7 @@ function download_2_save(_url,callBack) {
     }
   }; 
   var url = "http://localhost:3000/download?url=" + _url;
-  url += "&filename=xd5.mp3";
+  url += "&filename="+_fileName;
   xhttp.open("GET", url, true);
   xhttp.send();
 } 
