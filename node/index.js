@@ -31,7 +31,7 @@ app.get('/download', (req, res) => {
 	var url = c[1]; 
 	const { DownloaderHelper } = require('node-downloader-helper');
 	var dir =  __dirname+"\\mp3";
-	const dl = new DownloaderHelper(url,dir);
+	const dl = new DownloaderHelper(url,dir,{override:true});
 
 	dl.on('end', () =>{res.send(tag + ' dir=' + dir);
 	})
