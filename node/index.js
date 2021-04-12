@@ -1,4 +1,4 @@
-const tag = "[index.js_v0.0.14]";
+const tag = "[index.js_v0.0.15]";
  
 const express = require('express')
 const path = require('path');
@@ -22,6 +22,23 @@ app.get('/exeshell', (req, res) => {
 	var scmd = c[1];
 	var s = es.run(res,scmd);
 	//res.send(tag + ' s=' +s);
+})
+app.get('/download', (req, res) => {
+	console.log(req.url);
+	var a = req.url;
+	var b = a.split('?');
+	var c = b[1].split('url=');
+	var url = c[1]; 
+	const { DownloaderHelper } = require('node-downloader-helper');
+	var dir =  __dirname+"\\mp3";
+	const dl = new DownloaderHelper(url,dir);
+
+	dl.on('end', () =>{res.send(tag + ' dir=' + dir);
+	})
+	dl.start();
+
+	
+
 })
 
 app.get('/geturl', function(req, res){	
