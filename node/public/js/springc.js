@@ -1,6 +1,6 @@
 
 var osc = {
-    v: "springClient: v0.0.43",
+    v: "springClient: v0.0.51",
     d: null,
     f1: function(){ 
         if(!this.d){
@@ -30,6 +30,33 @@ var osc = {
                 }(b,i,v4url,v);
                 tb.bs.push(b);
             } 
+            var btnEditNow = blo0.blBtn(tb,tb.id+"btnEditNow","editNow","lightblue");
+            btnEditNow.onclick = function(){
+                v4url.innerHTML = "now.json";
+                v.innerHTML = "edit .json...";
+                var btnReflesh = blo0.blBtn(v4url,v4url.id+"btnReflesh","Reflesh",blGrey[0]);
+                btnReflesh.onclick = function(){
+                    var data = {
+                        edit_at: new Date(),
+                        b: 2
+                    };
+                    var xhr = new XMLHttpRequest();
+                    xhr.withCredentials = true;
+                    xhr.addEventListener("readystatechange", function() {
+                        if(this.readyState === 4) {
+                            var s = new Date();         
+                            s = s.toLocaleTimeString();
+                            var fJSON = "now.json"; 
+                            var jsonURL = "http://localhost:8080/"+fJSON;
+                            v.innerHTML =s + " <a href='"+jsonURL+"' target='_blank'>"+fJSON+"</a>";
+                        }	
+                    });
+                    xhr.open("POST", "http://localhost:8080/json?fileName=now.json");
+                    xhr.setRequestHeader("Content-Type", "text/plain");
+                    var txt = JSON.stringify(data);
+                    xhr.send(txt);
+                }
+            }
         }
         _on_off_div(btnSpringClient,this.d);
         var b = btnSpringClient;  
