@@ -1,4 +1,4 @@
-const tag = "[index.js_v0.0.24]";
+const tag = "[index.js_v0.0.25]";
  
 const express = require('express')
 const path = require('path');
@@ -33,7 +33,7 @@ app.get('/download', (req, res) => {
 	var f = d[1].split('filename=');
 	
 	const { DownloaderHelper } = require('node-downloader-helper');
-	var dir =  __dirname+"\\public\\dl";
+	var dir =  __dirname+"/public/dl";
 	console.log("dir="+dir);
 	const dl = new DownloaderHelper(url,dir,{fileName:f[1],override:true});
 
