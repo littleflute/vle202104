@@ -5,8 +5,9 @@
   <script src="https://littleflute.github.io/JavaScript/blclass.js"></script>
   </head>
 <body>
-  <h2>index.html v0.115
+  <h2>index.html v0.123
     <a href="https://learningenglish.voanews.com/"  target="_blank">https://learningenglish.voanews.com/</a>
+    <button id="btn_4_springc_js">springClient</button>
   </h2> 
   url: <span id="vleType">vleType</span>  
 
@@ -103,7 +104,15 @@ function download_2_save(_url,_fileName,callBack) {
   xhttp.open("GET", url, true);
   xhttp.send();
 } 
-
+var btnSpringClient = bl$("btn_4_springc_js");
+btnSpringClient.onclick = function(){
+  if(!this.b){
+      blo0.blScript("id_4_springc_js","js/springc.js");
+  }
+  else{
+    this.o.uiSwitch();
+  }
+}
 
 function r(){
   var dvle = document.getElementById("vleType");
