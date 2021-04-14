@@ -1,17 +1,20 @@
 
 var osc = {
-    v: "springClient: v0.0.51",
+    v: "springClient: v0.0.52",
     d: null,
     f1: function(){ 
         if(!this.d){
             this.d = blo0.blMD("id_4_md_springClientUI","ui_4_"+this.v,350,50,500,500,"lightblue");
-            var tb = blo0.blDiv(this.d,this.d.id+"tb","tb","grey");
+            var dToolbar = blo0.blDiv(this.d,this.d.id+"dToolbar","dToolbar","grey");
+            var dBlScripts = blo0.blDiv(this.d,this.d.id+"dBlScripts","dBlScripts","grey");
             var v4url = blo0.blDiv(this.d,this.d.id+"v4url","v4url","lightgrey");
             var v = blo0.blDiv(this.d,this.d.id+"v","v","lightgreen");
-            tb.bs = [];
+            var d4TA = blo0.blDiv(this.d,this.d.id+"d4TA","d4TA","lightblue");
+            d4TA.ta = blol0.blTextarea(d4TA,d4TA.id+"ta","txt",blGrey[0]);
+            dBlScripts.bs = [];
             for(var i = 0; i<10; i++){
                 var sn = i+1;
-                var b = blo0.blBtn(tb,tb.id+"b"+i,"video"+sn+".json",blGrey[0]);
+                var b = blo0.blBtn(dBlScripts,dBlScripts.id+"b"+i,"video"+sn+".json",blGrey[0]);
                 b.onclick = function(_this,_i,_v4url,_v){
                     return function(){
                         var sn = _i+1; 
@@ -28,9 +31,9 @@ var osc = {
                         blo0.blAjx(w,url); 
                     }
                 }(b,i,v4url,v);
-                tb.bs.push(b);
+                dBlScripts.bs.push(b);
             } 
-            var btnEditNow = blo0.blBtn(tb,tb.id+"btnEditNow","editNow","lightblue");
+            var btnEditNow = blo0.blBtn(dBlScripts,dBlScripts.id+"btnEditNow","editNow","lightblue");
             btnEditNow.onclick = function(){
                 v4url.innerHTML = "now.json";
                 v.innerHTML = "edit .json...";
