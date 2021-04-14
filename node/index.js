@@ -1,4 +1,4 @@
-const tag = "[index.js_v0.0.25]";
+const tag = "[index.js_v0.0.31]";
  
 const express = require('express')
 const path = require('path');
@@ -39,7 +39,7 @@ app.get('/download', (req, res) => {
 
 	dl.on('end', () =>{res.send(tag + ' dir=' + dir);
 	});
-	dl.on('error',() =>{ res.sned(tag + "error" + error);
+	dl.on('error',() =>{ res.send(tag + "error" + error);
 	});
 	dl.start();
 
