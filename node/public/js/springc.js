@@ -1,18 +1,6 @@
-function callSpring2MakeVideo(_this,_i,_v4url,_v){
-    var sn = _i+1; 
-    var w = {};
-    w._2do = function(txt){
-        _v.innerHTML = txt;
-    }
-    var fJSON = "video"+sn+".json";
-    var url = "http://localhost:8080/image/video?script="+fJSON;
-    var jsonURL = "http://localhost:8080/"+fJSON;
-    _v4url.innerHTML = "<a href='"+jsonURL+"' target='_blank'>"+fJSON+"</a>";
-    _v.innerHTML = "to do ...";
-    blo0.blAjx(w,url); 
-}
+
 var osc = {
-    v: "springClient: v0.0.54",
+    v: "springClient: v0.0.55",
     d: null,
     f1: function(){ 
         if(!this.d){
@@ -80,3 +68,18 @@ osc.uiSwitch = function(){
 osc.uiSwitch();
 btnSpringClient.o = osc;
 btnSpringClient.b = true;
+
+
+function callSpring2MakeVideo(_this,_i,_v4url,_v){
+    var sn = _i+1; 
+    var w = {};
+    w._2do = function(txt){
+        _v.innerHTML = txt;
+    }
+    var fJSON = "video"+sn+".json";
+    var url = "http://localhost:8080/image/video?script="+fJSON;
+    var jsonURL = "http://localhost:8080/"+fJSON;
+    _v4url.innerHTML = "<a href='"+jsonURL+"' target='_blank'>"+fJSON+"</a>";
+    _v.innerHTML = "to do ...";
+    blo0.blAjx(w,url); 
+}
