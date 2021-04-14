@@ -41,7 +41,13 @@
           fn += ".mp3";
 
           download_2_save(a2[1],fn,function(txt){ 
-            d.innerHTML = txt; 
+            var s = "<a target='_blank' href=";
+            s += "dl/";
+            s += fn
+            s += ">";
+            s += fn;
+            s += "</a>";
+            d.innerHTML = s; 
         });
         }
       }(b,a,i);

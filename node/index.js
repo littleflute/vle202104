@@ -39,7 +39,7 @@ app.get('/download', (req, res) => {
 
 	dl.on('end', () =>{res.send(tag + ' dir=' + dir);
 	});
-	dl.on('error',() =>{ res.send(tag + "error" + error);
+	dl.on('error',(e) =>{ res.send(tag + "error" + e);
 	});
 	dl.start();
 
