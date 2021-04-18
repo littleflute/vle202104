@@ -1,6 +1,7 @@
-const tag = "[index.js_v0.0.31]";
+const tag = "[index.js_v0.0.33]";
  
 const express = require('express')
+var cors = require('cors')
 const path = require('path');
 var request = require('request');
 var es = require('./exeshell.js');
@@ -24,7 +25,7 @@ app.get('/exeshell', (req, res) => {
 	//res.send(tag + ' s=' +s);
 })
 app.get('/download', (req, res) => {
-	console.log(req.url);
+	console.log(tag + " - download: " + req.url);
 	var a = req.url; 
 	var b = a.split('?');
 	var d = b[1].split('&'); 
@@ -53,7 +54,7 @@ app.get('/geturl', function(req, res){
 	var c = b[1].split('url=');
 	var url = c[1];
 
-	console.log(url);
+	console.log(tag + " - geturl:  " + url);
 
 	// request module is used to process the yql url and return the results in JSON format
 	request(url, function(err, resp, body) {

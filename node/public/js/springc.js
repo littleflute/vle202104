@@ -112,7 +112,7 @@ function _loop(id,_i,_v4url,_v){
 
 function _callSpring2MakeVideo(_v4url,_v){ 
 
-    var w = {};
+    var w = {}; 
     w._2do = function(txt){
         _v.innerHTML = txt;
     } 
