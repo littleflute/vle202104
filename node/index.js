@@ -1,4 +1,4 @@
-const tag = "[index.js_v0.0.33]";
+const tag = "[index.js_v0.0.34]";
  
 const express = require('express')
 var cors = require('cors')
@@ -10,6 +10,7 @@ const app = express()
 const port = 3000
 
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(cors())
 
 app.get('/', (req, res) => {
   res.send(tag + ' Hello World!')
